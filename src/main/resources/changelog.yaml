@@ -1,0 +1,128 @@
+databaseChangeLog:
+- changeSet:
+    id: '12598'
+    author: Jordan
+    objectQuotingStrategy: LEGACY
+    changes:
+    - sql:
+          dbms:  'postgresql'
+          endDelimiter: ';;'
+          splitStatements:  true
+          sql:  'create schema security'
+          stripComments:  true
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_security_role
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR
+        tableName: role
+        schemaName: security
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_security_user
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: first_name
+            type: VARCHAR
+        - column:
+            constraints:
+              nullable: false
+            name: last_name
+            type: VARCHAR
+        - column:
+            constraints:
+              nullable: false
+            name: role_id
+            type: INTEGER
+        tableName: user
+        schemaName: security
+    - addForeignKeyConstraint:
+        baseColumnNames: role_id
+        baseTableSchemaName: security
+        baseTableName: user
+        constraintName: fk_security_user_role
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableSchemaName: security
+        referencedTableName: role
+        validate: true
+    - sqlFile:
+          dbms:  'postgresql'
+          endDelimiter: ';;'
+          encoding:  UTF-8
+          path:  scripts/0001_VFScript.sql
+          relativeToChangelogFile:  true
+          splitStatements:  true
+          stripComments:  true
+- changeSet:
+    id: '12599'
+    author: Jordan
+    objectQuotingStrategy: LEGACY
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_security_address
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: street
+            type: VARCHAR
+        - column:
+            constraints:
+              nullable: false
+            name: town
+            type: VARCHAR
+        tableName: address
+        schemaName: security
+    - addColumn:
+        columns:
+        - column:
+            name: address_id
+            type: INTEGER
+        tableName: address
+        schemaName: security
+    - addForeignKeyConstraint:
+        baseColumnNames: address_id
+        baseTableSchemaName: security
+        baseTableName: address
+        constraintName: fk_security_user_address
+        schemaName: security
+        referencedColumnNames: id
+        referencedTableSchemaName: security
+        referencedTableName: address
+    - sqlFile:
+        dbms:  'postgresql'
+        endDelimiter: ';;'
+        encoding:  UTF-8
+        path:  scripts/0002_VFScript.sql
+        relativeToChangelogFile:  true
+        splitStatements:  true
+        stripComments:  true
+
