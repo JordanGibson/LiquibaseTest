@@ -29,12 +29,7 @@ public class DBManager {
 		createEmptySchema(tenantName);
 		Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(dbConnection);
 		database.setDefaultSchemaName(tenantName);
-		Liquibase liquibase = new Liquibase("changelog.yaml", new ClassLoaderResourceAccessor(), database);
-		liquibase.update("");
-
-		//createEmptySchema(tenantName);
-		//database.setDefaultSchemaName(tenantName);
-		//populateDefaultSchema();
+		populateDefaultSchema(database);
 	}
 
 	@SneakyThrows private static void createEmptySchema(String schemaName) {
