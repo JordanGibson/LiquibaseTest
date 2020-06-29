@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,7 +11,11 @@ public class WebServer {
 
 	@SneakyThrows WebServer() {
 		server = new ServerSocket(8080);
+	}
+
+	@SneakyThrows public void start() {
 		while (true) {
+			System.out.println("Listening for connection on port 8080 ....");
 			Socket socket = server.accept();
 			handleRequest(socket);
 		}
@@ -20,11 +23,11 @@ public class WebServer {
 
 	@SneakyThrows private void handleRequest(Socket socket) {
 		String request = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
-		if (request.startsWith("GET /newTenant")) {
-			Pattern pattern = Pattern.compile("name=([a-zA-Z0-9_]*) ");
+		if (request != null && request.startsWith("GET /newTenant")) {
+			Pattern pattern = Pattern.compile("name=(.*)");
 			Matcher matcher = pattern.matcher(request);
-			if(matcher.find())
-				DBManager.createTenant(matcher.group(0));
+			if (matcher.find())
+				DBManager.createTenant(matcher.group(1).split(" ")[0]);
 		}
 	}
 }
