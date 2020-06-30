@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id:  demo_4
+      author:  Jordan
+      runOnChange: true
+      changes:
+        - createProcedure:
+            path:  scripts/functions/user_to_json.sql
+        - createView:
+            replaceIfExists: true
+            path:  scripts/views/user_json.sql
+            viewName: user_json

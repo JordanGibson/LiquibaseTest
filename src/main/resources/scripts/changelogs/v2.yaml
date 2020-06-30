@@ -36,13 +36,3 @@ databaseChangeLog:
             constraintName: fk_security_user_address
             referencedColumnNames: id
             referencedTableName: address
-  - changeSet:
-      id:  demo_4
-      author:  Jordan
-      changes:
-        - createProcedure:
-            path:  scripts/functions/0002_user_to_json.sql
-        - createView:
-            replaceIfExists: true
-            path:  scripts/views/0002_user_json.sql
-            viewName: user_json

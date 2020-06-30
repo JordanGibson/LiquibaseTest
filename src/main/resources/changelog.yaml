@@ -3,3 +3,5 @@ databaseChangeLog:
       file: scripts/changelogs/v1.yaml
   - include:
       file: scripts/changelogs/v2.yaml
+  - include:
+      file: scripts/changelogs/runOnChange.yaml
