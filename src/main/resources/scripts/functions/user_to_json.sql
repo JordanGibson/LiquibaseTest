@@ -12,16 +12,3 @@ CREATE OR REPLACE FUNCTION user_to_json (name varchar, role_name varchar, street
  		);
 	END;
 $$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE VIEW user_json AS
-SELECT
-	user_to_json(
-		u.first_name || ' ' || u.last_name,
-		r.name,
-		a.street,
-		a.town)
-FROM user u
-JOIN role r
-	ON r.id = u.role_id
-LEFT JOIN address a
-	ON a.id = a.address_id;
