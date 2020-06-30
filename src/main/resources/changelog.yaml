@@ -87,10 +87,10 @@ databaseChangeLog:
                         - column:
                               name: address_id
                               type: INTEGER
-                    tableName: address
+                    tableName: user
               - addForeignKeyConstraint:
                     baseColumnNames: address_id
-                    baseTableName: address
+                    baseTableName: user
                     constraintName: fk_security_user_address
                     referencedColumnNames: id
                     referencedTableName: address
