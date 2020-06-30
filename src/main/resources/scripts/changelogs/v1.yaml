@@ -57,12 +57,3 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: role
             validate: true
-  - changeSet:
-      id:  demo_2
-      author:  Andrew
-      changes:
-        - createProcedure:
-            path:  scripts/functions/0001_user_to_json.sql
-        - createView:
-            path:  scripts/views/0001_user_json.sql
-            viewName: user_json
