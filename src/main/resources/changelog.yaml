@@ -1,5 +1,3 @@
 databaseChangeLog:
   - include:
       file: scripts/changelogs/v1.yaml
-  - include:
-      file: scripts/changelogs/v2.yaml
