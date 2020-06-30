@@ -64,5 +64,5 @@ databaseChangeLog:
         - createProcedure:
             path:  scripts/functions/0001_user_to_json.sql
         - createView:
-            path:  scripts/views/0002_user_json.sql
+            path:  scripts/views/0001_user_json.sql
             viewName: user_json
