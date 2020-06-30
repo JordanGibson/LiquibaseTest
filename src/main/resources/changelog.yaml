@@ -58,45 +58,11 @@ databaseChangeLog:
                     referencedTableName: role
                     validate: true
     - changeSet:
-          id: demo_2
-          author: Jordan
-          objectQuotingStrategy: LEGACY
-          changes:
-              - createTable:
-                    columns:
-                        - column:
-                              constraints:
-                                  nullable: false
-                                  primaryKey: true
-                                  primaryKeyName: pk_security_address
-                              name: id
-                              type: INTEGER
-                        - column:
-                              constraints:
-                                  nullable: false
-                              name: street
-                              type: VARCHAR
-                        - column:
-                              constraints:
-                                  nullable: false
-                              name: town
-                              type: VARCHAR
-                    tableName: address
-              - addColumn:
-                    columns:
-                        - column:
-                              name: address_id
-                              type: INTEGER
-                    tableName: address
-              - addForeignKeyConstraint:
-                    baseColumnNames: address_id
-                    baseTableName: address
-                    constraintName: fk_security_user_address
-                    referencedColumnNames: id
-                    referencedTableName: address
-    - changeSet:
-          id:  demo_3
+          id:  demo_2
           author:  Andrew
           changes:
               -  createProcedure:
-                     path:  scripts/functions/user_to_json.sql
+                     path:  scripts/functions/0001_user_to_json.sql
+              -  createView:
+                     path:  scripts/views/0002_user_json.sql
+                     viewName: user_json
