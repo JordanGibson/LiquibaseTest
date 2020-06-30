@@ -1,0 +1,68 @@
+databaseChangeLog:
+  - changeSet:
+      id: demo_1
+      author: Jordan
+      objectQuotingStrategy: LEGACY
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_security_role
+                  name: id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR
+            tableName: role
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_security_user
+                  name: id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: first_name
+                  type: VARCHAR
+              - column:
+                  constraints:
+                    nullable: false
+                  name: last_name
+                  type: VARCHAR
+              - column:
+                  constraints:
+                    nullable: false
+                  name: role_id
+                  type: INTEGER
+            tableName: user
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: user
+            constraintName: fk_security_user_role
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: role
+            validate: true
+  - changeSet:
+      id:  demo_2
+      author:  Andrew
+      changes:
+        - createProcedure:
+            path:  scripts/functions/0001_user_to_json.sql
+        - createView:
+            path:  scripts/views/0001_user_json.sql
+            viewName: user_json
